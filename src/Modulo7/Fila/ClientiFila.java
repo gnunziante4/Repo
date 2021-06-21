@@ -23,7 +23,7 @@ public class ClientiFila  implements Comparable<ClientiFila> {
     private String cognome;
     private int età;
     private int id;
-    private int count = 0;
+    private static int count = 0;
 
 
     public ClientiFila(String nome, String cognome, int età) {
