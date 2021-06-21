@@ -1,19 +1,19 @@
 package Modulo7.Biblioteca7;
 
+import Modulo7.Fila.ClientiFila;
+
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Autore {
+public class Autore implements Comparable<Autore>{
 
     private String nomeAutore;
-    private String cognomeAutore;
     private int codiceAutore;
     private static int count = 0;
-    private Set<Libro> libriAutore = new TreeSet<>();
 
-    public Autore(String nomeAutore, String cognomeAutore) {
+    public Autore(String nomeAutore) {
         setNomeAutore(nomeAutore);
-        setCognomeAutore(cognomeAutore);
         setCodiceAutore(count++);
     }
 
@@ -25,13 +25,6 @@ public class Autore {
         this.nomeAutore = nomeAutore;
     }
 
-    public String getCognomeAutore() {
-        return cognomeAutore;
-    }
-
-    public void setCognomeAutore(String cognomeAutore) {
-        this.cognomeAutore = cognomeAutore;
-    }
 
     public int getCodiceAutore() {
         return codiceAutore;
@@ -41,11 +34,26 @@ public class Autore {
         this.codiceAutore = codiceAutore;
     }
 
-    public Set<Libro> getLibriAutore() {
-        return libriAutore;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Autore autore = (Autore) o;
+        return codiceAutore == autore.codiceAutore && Objects.equals(nomeAutore, autore.nomeAutore);
     }
 
-    public void setLibriAutore(Set<Libro> libriAutore) {
-        this.libriAutore = libriAutore;
+    @Override
+    public int hashCode() {
+        return Objects.hash(nomeAutore, codiceAutore);
     }
+
+    @Override
+    public int compareTo(Autore a) {
+        int result = nomeAutore.compareTo(a.nomeAutore);
+        if (result == 0){
+            result = Integer.compare(codiceAutore,a.codiceAutore);
+        }
+        return result;
+    }
+
 }

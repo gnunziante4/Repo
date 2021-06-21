@@ -3,41 +3,41 @@ package Modulo7.Biblioteca7;
 public class BiblioMain {
     public static void main(String[] args) {
 
-        Autore a1 = new Autore("J.R.R","Tolkien");
+        Autore a1 = new Autore("J.R.R Tolkien");
 
-        Libro l1 = new Libro("Il signore degli anelli", "romanzo high fantasy epico scritto da J. R. R. Tolkien" +
-                " e ambientato alla fine della Terza Era dell'immaginaria Terra di Mezzo",a1);
+        Libro l1 = new Libro(111,"Il signore degli anelli", "romanzo high fantasy epico ambientato nella Terra di Mezzo");
 
-        Libro l2 = new Libro(
+        Libro l2 = new Libro(112,
                 "Lo Hobbit",
-                "Lo Hobbit o la riconquista del tesoro, noto anche semplicemente come Lo Hobbit, " +
-                        "è un romanzo fantasy scritto da J. R. R. Tolkien.",a1);
+                "Lo Hobbit o la riconquista del tesoro, è un romanzo fantasy");
 
-        Autore a2 = new Autore("George","Orwell");
+        Autore a2 = new Autore("George Orwell");
 
-        Libro l3 = new Libro(
+        Libro l3 = new Libro(333,
                 "1984",
-                "1984 (Nineteen Eighty-Four) è uno dei più celebri romanzi di George Orwell, " +
-                        "pubblicato nel 1949 ma iniziato a scrivere nel" +
-                        " 1948 (anno da cui deriva il titolo, ottenuto appunto " +
-                        "dall'inversione delle ultime due cifre).",a2);
+                "è uno dei più celebri romanzi di George Orwell, " +
+                        "pubblicato nel 1949");
 
-        Autore a3 = new Autore("J. K.","Rowling");
+        Autore a3 = new Autore("J. K. Rowling");
 
-        Libro l4 = new Libro("Harry Potter e la pietra filosofale", "primo capitolo della famosa" +
-                " saga di maghetti",a3);
-
-        System.out.println(l1.getCodiceLibro());
-        System.out.println(l2.getCodiceLibro());
-        System.out.println(l3.getCodiceLibro());
-        System.out.println(l4.getCodiceLibro());
-
-        System.out.println(a1.getCodiceAutore());
-        System.out.println(a2.getCodiceAutore());
-        System.out.println(a3.getCodiceAutore());
+        Libro l4 = new Libro(414,"Harry Potter e la pietra filosofale", "primo capitolo della famosa" +
+                " saga di maghetti");
 
 
+        BilbliotecaGestore biblio = new BilbliotecaGestore();
 
+        biblio.aggiungiLibro(a1,l1);
+        biblio.aggiungiLibro(a1,l2);
+        biblio.aggiungiLibro(a2,l3);
+        biblio.aggiungiLibro(a3,l4);
 
+        //System.out.println(biblio.ricercaLibroDaNome("Harry Potter e la pietra filosofale"));
+       // System.out.println(biblio.ricercaLibroDaCodice(300));
+
+       // System.out.println(biblio.ricercaLibroDaNome(l3.getNomeLibro()));
+       // biblio.rimozioneLibro(l3);
+       // System.out.println(biblio.ricercaLibroDaNome(l3.getNomeLibro()));
+
+        System.out.println(biblio);
     }
 }

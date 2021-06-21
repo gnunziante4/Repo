@@ -24,3 +24,8 @@ hs_err_pid*
 
 #Telegram Bot
 token.txt
+
+#tweet
+realdonaldtrump.csv
+trumptweets.csv
+english_stopwords.txt

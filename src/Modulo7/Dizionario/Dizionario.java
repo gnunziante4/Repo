@@ -53,8 +53,7 @@ public class Dizionario {
 
 
     public void inserisciSignificato(String parola, String significato) {
-        Character lettera;
-        lettera = Character.toUpperCase(parola.charAt(0));
+
         TreeMap<String, Set<String>> mapParole = new TreeMap<>();
         if (mapParole.containsKey(parola)) {
             Set<String> insiemeSignificati = new TreeSet<>();
@@ -68,7 +67,6 @@ public class Dizionario {
 
     }
 
-    // for (Map.Entry<Character, TreeMap<String, Set<String>>> entry : dizionario.entrySet()) {
     @Override
     public String toString () {
         StringBuilder sb = new StringBuilder();
@@ -86,9 +84,9 @@ public class Dizionario {
             sb.deleteCharAt( sb.length() - 1 );
             sb.append("]\n");
         }
-return sb.toString();
-        }
+        return sb.toString();
     }
+}
 
 
 

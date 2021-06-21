@@ -2,17 +2,16 @@ package Modulo7.Biblioteca7;
 
 import java.util.Objects;
 
-public class Libro {
+public class Libro implements Comparable<Libro> {
 
     private String nomeLibro;
     private String sinossiLibro;
     private int codiceLibro;
-    private static int count = 0;
 
-    public Libro(String nomeLibro, String sinossiLibro, Autore autore) {
+    public Libro(int codiceLibro,String nomeLibro, String sinossiLibro) {
+        setCodiceLibro(codiceLibro);
         setNomeLibro(nomeLibro);
         setSinossiLibro(sinossiLibro);
-        setCodiceLibro(count++);
     }
 
 
@@ -53,6 +52,15 @@ public class Libro {
     @Override
     public int hashCode() {
         return Objects.hash(nomeLibro, codiceLibro);
+    }
+
+    @Override
+    public int compareTo(Libro l) {
+        int result = nomeLibro.compareTo(l.nomeLibro);
+        if (result == 0){
+            result = Integer.compare(codiceLibro,l.codiceLibro);
+        }
+        return result;
     }
 
 
