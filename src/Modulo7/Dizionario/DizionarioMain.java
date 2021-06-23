@@ -7,19 +7,19 @@ public class DizionarioMain {
     public static void main(String[] args) {
 
        Dizionario diz = new Dizionario();
-       diz.inserisciParola("arma","utensile per offendere");
+       diz.inserisciParolaeSignificato("arma","utensile per offendere");
      diz.inserisciSignificato("arma","forza armata");
-     diz.inserisciParola("calcio","elemento chimico");
-     diz.inserisciSignificato("calcio","sport");
-        diz.inserisciParola("carro","dei vincitori");
-        diz.inserisciParola("carro","dei buoi");
-        diz.inserisciParola("bolla","sfera che si forma in seguito all'ebollizione su un liquido");
+     diz.inserisciParolaeSignificato("calcio","elemento chimico");
+     diz.inserisciParolaeSignificato("calcio","sport");
+        diz.inserisciParolaeSignificato("carro","dei vincitori");
+        diz.inserisciSignificato("carro","dei buoi");
+        diz.inserisciParolaeSignificato("bolla","sfera che si forma in seguito all'ebollizione su un liquido");
         diz.inserisciSignificato("bolla","lesione cutanea causata da una ustione");
-        diz.inserisciParola("dado","utensile per avvitare la vite");
-        diz.inserisciParola("dado","insaporisce brodo");
+        diz.inserisciParolaeSignificato("dado","utensile per avvitare la vite");
+        diz.inserisciSignificato("dado","insaporisce brodo");
 
 
-        System.out.println(diz.toString());
+        System.out.println(diz);
 
 
 

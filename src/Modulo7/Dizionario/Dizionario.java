@@ -24,7 +24,7 @@ public class Dizionario {
     }
 
     //Metodi
-    public void inserisciParola(String parola, String significato) {
+    public void inserisciParolaeSignificato(String parola, String significato) {
         Character lettera;
         lettera = Character.toUpperCase(parola.charAt(0));
         Set<String> insiemeSignificati = new TreeSet<>();
@@ -52,19 +52,22 @@ public class Dizionario {
     }
 
 
-    public void inserisciSignificato(String parola, String significato) {
-
-        TreeMap<String, Set<String>> mapParole = new TreeMap<>();
-        if (mapParole.containsKey(parola)) {
-            Set<String> insiemeSignificati = new TreeSet<>();
-            insiemeSignificati = mapParole.get(parola);
-            //mi aggiunge quel significato al set
-            insiemeSignificati.add(significato);
-            // dizionario.put(lettera, mapParole);
-        } else {
-            inserisciParola(parola, significato);
+    public void inserisciSignificato(String significato,String parola) {
+        Character lettera;
+        lettera = Character.toUpperCase(parola.charAt(0));
+        TreeMap<String, Set<String>> mapParole = dizionario.get(lettera);
+        Set<String> insiemeSignificati = new TreeSet<>();
+        if (dizionario.containsKey(lettera)) {
+            for (String parolaIndx : mapParole.keySet()) {
+                if (parolaIndx == parola) {
+                    insiemeSignificati = mapParole.get(parolaIndx);
+                    insiemeSignificati.add(significato);
+                    mapParole.put(parola, insiemeSignificati);
+                }else{
+                    inserisciParolaeSignificato(parola,significato);
+                }
+            }
         }
-
     }
 
     @Override

@@ -115,8 +115,6 @@ public class TweetMain {
             temp.put(aa.getKey(), aa.getValue());
         }
         return temp;
-
-
     }
 }
 
