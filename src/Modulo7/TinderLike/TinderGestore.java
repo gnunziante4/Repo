@@ -5,50 +5,84 @@ import java.util.*;
 
 public class TinderGestore {
     // <id, [Interessi1,Interessi2,...]>
-    private  Map<Utenti, HashSet<TipoInteressi>> tinderMap = new HashMap<>();
+    //mi carico nel frattempo un altra mappa <id utente,[id interesse1,id interesse2,..]>
+    // che mi serve per i metodi di rimozione
+    //e per ottenreun rapido accesso all'id interesse
+    private  Map<Utenti, HashSet<Interessi>> tinderMap ;
+    private Map<Integer,HashSet<Integer>> mapIdUtenteidInteressi ;
+
+
+    public Map<Utenti, HashSet<Interessi>> getTinderMap() {
+        return tinderMap;
+    }
+
+    public void setTinderMap(Map<Utenti, HashSet<Interessi>> tinderMap) {
+        this.tinderMap = new HashMap<Utenti, HashSet<Interessi>>();;
+    }
+
+    public Map<Integer, HashSet<Integer>> getMapIdUtenteidInteressi() {
+        return mapIdUtenteidInteressi;
+    }
+
+    public void setMapIdUtenteidInteressi(Map<Integer, HashSet<Integer>> mapIdUtenteidInteressi) {
+        this.mapIdUtenteidInteressi = new HashMap<Integer, HashSet<Integer>>();
+    }
 
     public TinderGestore() {
         setTinderMap(tinderMap);
+        setMapIdUtenteidInteressi(mapIdUtenteidInteressi);
     }
 
     public void aggiungiUtente(Utenti utente){
-        HashSet<TipoInteressi> interesseSet = new HashSet<TipoInteressi>();
+        HashSet<Interessi> interesseSet = new HashSet<>();
         tinderMap.put(utente,interesseSet);
     }
 
-    public void aggiungiInteresse(Utenti utente,TipoInteressi interesse){
-        HashSet<TipoInteressi> interesseSet=new HashSet<TipoInteressi>();
+    public void aggiungiInteresse(Utenti utente,Interessi interesse){
+        HashSet<Interessi> interesseSet=new HashSet<>();
+        HashSet<Integer> setIdInteressi = new HashSet<>();
+        Integer idInt = interesse.getTipoInteressi().getId();
+        Integer idUtente = utente.getId();
+        //
         if (tinderMap.containsKey(utente)) {
+            //li aggiungo in parallello
+            //controllo solo sulla tinderMap perchè sono solo
+            //aggiunti di attributi di Utente e interessi
             interesseSet = tinderMap.get(utente);
+            setIdInteressi = mapIdUtenteidInteressi.get(idUtente);
             interesseSet.add(interesse);
+            setIdInteressi.add(idInt);
         }else {
             interesseSet.add(interesse);
+            setIdInteressi.add(idInt);
             tinderMap.put(utente, interesseSet);
+            mapIdUtenteidInteressi.put(idUtente,setIdInteressi);
         }
     }
 
-    public boolean rimuoviUtente(Utenti utente){
-        if (tinderMap.containsKey(utente)){
-            tinderMap.remove(utente);
+   /* public boolean rimuoviUtente(Utenti idUtente){
+       if (mapIdUtenteidInteressi.containsKey(idUtente)){
             return true;
         }
         return false;
+
     }
 
-    public Map<Utenti,Integer> mappaInteressiComuni(Utenti utente) {
+    //questo è barare, si deve togliare dato un attributo
 
+    public Map<Utenti,Integer> mappaInteressiComuni(Utenti utente) {
         //sicuro sarà un hashmap
-        HashMap<Utenti, Integer> mapNonOrdinata  = new HashMap<>();
-        HashSet<TipoInteressi> interesseUtente;
+        Map<Utenti, Integer> mapNonOrdinata  = new HashMap<>();
+        Set<Interessi> interesseUtente;
         int numeroInteressiComuni;
         if (tinderMap.containsKey(utente)) {
             interesseUtente = tinderMap.get(utente);
             //copia di interesseUtente
             //addall implicito
-            HashSet<TipoInteressi> interesseIntersezione = new HashSet<TipoInteressi>(interesseUtente);
+            Set<Interessi> interesseIntersezione = new HashSet<Interessi>(interesseUtente);
             //interesseIntersezione.addAll(interesseUtente);
             for (Utenti tempUtente : tinderMap.keySet()) {
-                HashSet<TipoInteressi> interesseTempUtente =  tinderMap.get(tempUtente);
+                Set<Interessi> interesseTempUtente =  tinderMap.get(tempUtente);
                 if (tempUtente.getId() != utente.getId()) {
                     interesseIntersezione.retainAll(interesseTempUtente);
                     numeroInteressiComuni = interesseIntersezione.size();
@@ -56,7 +90,7 @@ public class TinderGestore {
                 }
             }
         }
-        return sortByValue(mapNonOrdinata);
+        return sortByValue((HashMap<Utenti, Integer>) mapNonOrdinata);
     }
 
     public Utenti migliorMatch(Utenti utente) {
@@ -71,18 +105,18 @@ public class TinderGestore {
         }else{
             return primoUtente;
         }
-    }
+    }*/
 
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
         for(Utenti utente : tinderMap.keySet()){
             str.append(utente.getNomeUtente()).append(":");
-            HashSet<TipoInteressi> interessi = tinderMap.get(utente);
+            Set<Interessi> interessi = tinderMap.get(utente);
             //Gli oggetti nel Hashset sono di tipo TipoInteressi
             //ne segue che devo accedere a loro col tipo TipoInteressi e poi stmparne la stringa
-            for (TipoInteressi interesse : interessi) {
-                str.append(interesse.getStr()).append(",");
+            for (Interessi interesse : interessi) {
+                str.append(interesse.getTipoInteressi().getStr()).append(",");
             }
             str.deleteCharAt( str.length() - 1 );
             str.append("\n");
@@ -90,13 +124,6 @@ public class TinderGestore {
         return str.toString();
     }
 
-    public Map<Utenti, HashSet<TipoInteressi>> getTinderMap() {
-        return tinderMap;
-    }
-
-    public void setTinderMap(Map<Utenti, HashSet<TipoInteressi>> tinderMap) {
-        this.tinderMap = tinderMap;
-    }
 
     //
     public static Map<Utenti, Integer> sortByValue(HashMap<Utenti, Integer> hm) {

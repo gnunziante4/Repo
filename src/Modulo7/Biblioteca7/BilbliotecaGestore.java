@@ -92,6 +92,14 @@ return sb.toString();
             }
         }
 
+        //creare mappa aggiuntiva <id libro, autore>
+    //get in O(1) data lachiave, questo è il vantaggio
+    //autore serve poi per tenere conto nella rimozioe del libro nel catalogo?
+    //perchè come ho fatto vale se ho tutto l'oggetto
+    //ma di solito si ha solo un attributo dell'oggetto
+
+
+
     //Getter and Setter
     public Map<Autore, Set<Libro>> getBiblio() {
         return biblio;
