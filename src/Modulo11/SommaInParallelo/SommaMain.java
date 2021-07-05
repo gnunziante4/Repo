@@ -1,7 +1,4 @@
-package Modulo11.Associativa;
-
-import java.util.Arrays;
-import java.util.Random;
+package Modulo11.SommaInParallelo;
 
 public class SommaMain {
 

@@ -1,4 +1,4 @@
-package Modulo11.Associativa;
+package Modulo11.SommaInParallelo;
 
 public class SommaThread extends   Thread{
 
